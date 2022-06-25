@@ -23,6 +23,13 @@ class ApiController  extends Controller
         ])->get();
     }
 
+    public function employees(Request $r)
+    {
+        return  Administrator::where([
+            'enterprise_id' => $r->user->enterprise_id
+        ])->get();
+    }
+
     public function login(Request $r)
     {
         if ((!isset($_POST['username'])) || (!isset($_POST['password']))) {
