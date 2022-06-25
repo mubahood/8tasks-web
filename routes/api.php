@@ -20,12 +20,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login', [ApiController::class, 'login']);//new
+Route::post('login', [ApiController::class, 'login']); //new
 /* Route::get('tasks', [EnsureTokenIsValid::class, 'tasks'])
     ->middleware(ApiController::class);
  */
 Route::group(['middleware' => 'apiList'], function ($router) {
-    Route::get('/tasks', [ApiController::class, 'tasks']); 
+    Route::get('/tasks', [ApiController::class, 'tasks']);
+    Route::get('/projects', [ApiController::class, 'tasks']);
 });
 
 

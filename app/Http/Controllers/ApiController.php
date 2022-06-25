@@ -10,9 +10,16 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiController  extends Controller
 {
-    public function tasks(Request $r){
+    public function tasks(Request $r)
+    {
         return $r->user->username;
     }
+
+    public function projects(Request $r)
+    {
+        return $r->user->username;
+    }
+
     public function login(Request $r)
     {
         if ((!isset($_POST['username'])) || (!isset($_POST['password']))) {
