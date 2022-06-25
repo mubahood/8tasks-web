@@ -26,7 +26,7 @@ Route::post('login', [ApiController::class, 'login']); //new
  */
 Route::group(['middleware' => 'apiList'], function ($router) {
     Route::get('/tasks', [ApiController::class, 'tasks']);
-    Route::get('/projects', [ApiController::class, 'tasks']);
+    Route::get('/projects', [ApiController::class, 'projects']);
 });
 
 

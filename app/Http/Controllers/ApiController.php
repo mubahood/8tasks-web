@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\Utils;
 use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Http\Request;
@@ -17,7 +18,9 @@ class ApiController  extends Controller
 
     public function projects(Request $r)
     {
-        return $r->user->username;
+        return  Project::where([
+            'enterprise_id' => $r->user->enterprise_id
+        ])->get();
     }
 
     public function login(Request $r)
