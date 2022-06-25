@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Task;
 use App\Models\Utils;
+use Carbon\Carbon;
 use Encore\Admin\Auth\Database\Administrator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +13,45 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiController  extends Controller
 {
+    public function tasks_create(Request $r)
+    {
+        $t = new Task();
+        $u = $r->user;
+
+        $t->assigned_to = $r->assigned_to;
+        $t->assigned_by = $u->id;
+        $t->submision_status = 0;
+        $t->review_status = 0;
+        $t->category_id = 0;
+        $t->value = 0;
+        $t->body = $r->body;
+        $t->project_id = $r->project_id;
+        $t->title = $r->title;
+        $t->review_comment = $r->review_comment;
+        $t->enterprise_id = $u->enterprise_id;
+
+
+
+        $main_date =  Carbon::parse($r->task_date)->format('Y-m-d');
+        $t->start_date = $main_date . " " . Carbon::parse($r->start_time)->format('H:i:s');
+        $t->end_date = $main_date . " " . Carbon::parse($r->end_time)->format('H:i:s');
+        $t->submit_before = $main_date . " " . Carbon::parse($r->end_time)->format('H:i:s');
+
+
+        if ($t->save()) {
+            return Utils::response([
+                'status' => 1,
+                'message' => 'Task created successfully.',
+            ]);
+        } else {
+            return  Utils::response([
+                'status' => 0,
+                'message' => 'Failed to create task.',
+            ]);
+        }
+    }
+
+
     public function tasks(Request $r)
     {
         return $r->user->username;
