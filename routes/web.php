@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
 
     $main_date =  Carbon::parse('2022-06-25 00:00:00.000')->format('Y-m-d');
     $t = Carbon::parse('0001-01-01 12:00:00.000');
@@ -23,3 +23,4 @@ Route::get('/', function () {
     die("Romina");
     return view('welcome');
 });
+ */
